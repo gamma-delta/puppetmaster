@@ -2,6 +2,11 @@
 name = "puppetmaster"
 version = "0.1.0"
 edition = "2021"
+description = "Easy-to-use input handling for writing games"
+license = "MIT"
+keywords = ["gamedev", "controls"]
+categories = ["game-development"]
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
