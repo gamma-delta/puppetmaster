@@ -1,5 +1,8 @@
 # Puppetmaster
 
+[![crates.io](https://img.shields.io/crates/v/puppetmaster)](https://crates.io/crates/puppetmaster)
+[![API documentation](https://docs.rs/puppetmaster/badge.svg)](https://docs.rs/puppetmaster/)
+
 Easy-to-use input handling for writing games.
 
 This crate exposes different kinds of input handlers. Pick which one to use based on how your game engine
