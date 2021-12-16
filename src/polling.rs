@@ -3,12 +3,12 @@ use std::hash::Hash;
 use ahash::AHashMap;
 use itertools::Itertools;
 
-/// Input handler for an event-based game engine.
+/// Input handler for an polling-based game engine.
 ///
-/// Use this when your game engine provides inputs via an event system.
+/// Use this when your game engine provides inputs via an poll system.
 ///
-/// At the top of your game loop, you MUST call [`PollingInputHandler::update`] to
-/// process the input events its received. The general logic should look like this:
+/// At the top of your game loop, you MUST call [`PollingInputHandler::update`]
+/// The general logic should look like this:
 ///
 /// ```rust
 /// # use puppetmaster::PollingInputHandler;

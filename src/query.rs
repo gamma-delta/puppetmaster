@@ -8,8 +8,8 @@ use itertools::Itertools;
 /// Use this when your game engine provides inputs via a function you can call to
 /// query the state of a given key.
 ///
-/// At the top of your game loop, you MUST call [`QueryInputHandler::update`] to
-/// process the input events its received. The general logic should look like this:
+/// At the top of your game loop, you MUST call [`QueryInputHandler::update`].
+/// The general logic should look like this:
 ///
 /// ```rust
 /// # use puppetmaster::QueryInputHandler;

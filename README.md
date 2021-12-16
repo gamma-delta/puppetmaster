@@ -5,9 +5,9 @@ Easy-to-use input handling for writing games.
 This crate exposes different kinds of input handlers. Pick which one to use based on how your game engine
 provides you with input data.
 
-- [`EventInputHandler`] for when your game engine uses events
-- [`PollingInputHandler`] for when your game engine provides a set of the currently pressed keys
-- [`QueryInputHandler`] for when your game engine provides a function to call to query the state of a key.
+- `EventInputHandler` for when your game engine uses events
+- `PollingInputHandler` for when your game engine provides a set of the currently pressed keys
+- `QueryInputHandler` for when your game engine provides a function to call to query the state of a key.
 
 ## Inputs vs Controls
 
