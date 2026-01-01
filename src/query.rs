@@ -150,6 +150,17 @@ impl<I: Hash + Eq + Clone, C: Hash + Eq + Clone> QueryInputHandler<I, C> {
     pub fn clicked(&self, ctrl: C) -> bool {
         self.press_time(ctrl) == 1
     }
+    ///
+    /// Return the input->control map.
+    pub fn control_config(&self) -> &AHashMap<I, C> {
+        &self.control_config
+    }
+
+    /// Return the input->control map for editing.
+    /// I recommend calling [`Self::clear_inputs`] as you do this.
+    pub fn control_config_mut(&mut self) -> &mut AHashMap<I, C> {
+        &mut self.control_config
+    }
 }
 
 impl<I, C> Default for QueryInputHandler<I, C> {

@@ -159,6 +159,29 @@ impl<I: Hash + Eq + Clone, C: Hash + Eq + Clone> EventInputHandler<I, C> {
     pub fn clicked(&self, ctrl: C) -> bool {
         self.press_time(ctrl) == 1
     }
+
+    /// Return an iterator of all possible inputs, what they are mapped to,
+    /// and the number of frames they've been pressed for.
+    ///
+    /// I implemented this for the specific use-case of un-pressing all gamepad inputs
+    /// when a gamepad is unplugged.
+    pub fn all_pressed(&self) -> impl Iterator<Item = (I, C, u32)> + '_ {
+        self.control_config.iter().map(|(input, ctrl)| {
+            let presstime = self.control_time.get(ctrl).copied().unwrap_or(0);
+            (input.clone(), ctrl.clone(), presstime)
+        })
+    }
+
+    /// Return the input->control map.
+    pub fn control_config(&self) -> &AHashMap<I, C> {
+        &self.control_config
+    }
+
+    /// Return the input->control map for editing.
+    /// I recommend calling [`Self::clear_inputs`] as you do this.
+    pub fn control_config_mut(&mut self) -> &mut AHashMap<I, C> {
+        &mut self.control_config
+    }
 }
 
 impl<I, C> Default for EventInputHandler<I, C> {

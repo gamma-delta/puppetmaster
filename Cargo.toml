@@ -1,8 +1,9 @@
 [package]
 name = "puppetmaster"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 description = "Easy-to-use input handling for writing games"
+repository = "https://github.com/gamma-delta/puppetmaster"
 license = "MIT"
 keywords = ["gamedev", "controls"]
 categories = ["game-development"]
@@ -11,8 +12,8 @@ categories = ["game-development"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-ahash = "0.7.6"
-itertools = "0.10.3"
+ahash = "0.8.12"
+itertools = "0.14.0"
 
 [dev-dependencies]
-ggez = "0.7.0"
+ggez = "0.9.3"
