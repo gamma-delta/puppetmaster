@@ -1,6 +1,6 @@
 [package]
 name = "puppetmaster"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 description = "Easy-to-use input handling for writing games"
 repository = "https://github.com/gamma-delta/puppetmaster"
