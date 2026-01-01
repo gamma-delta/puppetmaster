@@ -4,7 +4,7 @@ use ggez::{
     conf::WindowSetup,
     event::{self, EventHandler},
     graphics::{self, Color, DrawMode, DrawParam, FillOptions, Mesh},
-    input::keyboard::KeyCode,
+    input::keyboard::{KeyCode, KeyInput},
     timer, Context, ContextBuilder, GameResult,
 };
 
@@ -82,10 +82,10 @@ impl EventHandler for MainState {
     }
 
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
-        graphics::clear(ctx, Color::BLACK);
+        let mut canvas = graphics::Canvas::from_frame(ctx, Color::BLACK);
 
         let size = 16.0;
-        let (w, h) = graphics::size(ctx);
+        let (w, h) = ctx.gfx.drawable_size();
 
         // Things are drawn from their upper-left corner
         let circle = Mesh::new_circle(
@@ -96,25 +96,29 @@ impl EventHandler for MainState {
             0.1,
             Color::RED,
         )?;
-        graphics::draw(ctx, &circle, DrawParam::default())?;
+        canvas.draw(&circle, DrawParam::default());
 
-        graphics::present(ctx)?;
+        canvas.finish(ctx)?;
         timer::yield_now();
-
         Ok(())
     }
 
     fn key_down_event(
         &mut self,
         _ctx: &mut Context,
-        keycode: KeyCode,
-        _keymods: event::KeyMods,
+        keyinput: KeyInput,
         _repeat: bool,
-    ) {
-        self.controls.on_input_down(keycode);
+    ) -> GameResult {
+        if let Some(kc) = keyinput.keycode {
+            self.controls.on_input_down(kc);
+        }
+        Ok(())
     }
 
-    fn key_up_event(&mut self, _ctx: &mut Context, keycode: KeyCode, _keymods: event::KeyMods) {
-        self.controls.on_input_up(keycode);
+    fn key_up_event(&mut self, _ctx: &mut Context, keyinput: KeyInput) -> GameResult {
+        if let Some(kc) = keyinput.keycode {
+            self.controls.on_input_up(kc);
+        }
+        Ok(())
     }
 }

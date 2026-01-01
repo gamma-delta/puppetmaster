@@ -4,7 +4,7 @@ use ggez::{
     conf::WindowSetup,
     event::{self, EventHandler},
     graphics::{self, Color, DrawMode, DrawParam, FillOptions, Mesh},
-    input::keyboard::{self, KeyCode},
+    input::keyboard::KeyCode,
     timer, Context, ContextBuilder, GameResult,
 };
 
@@ -53,8 +53,7 @@ fn main() {
 
 impl EventHandler for MainState {
     fn update(&mut self, ctx: &mut Context) -> GameResult {
-        self.controls
-            .update(|key| keyboard::is_key_pressed(ctx, key));
+        self.controls.update(|key| ctx.keyboard.is_key_pressed(key));
 
         if self.controls.clicked(Control::Return) {
             self.x = 0.0;
@@ -83,10 +82,10 @@ impl EventHandler for MainState {
     }
 
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
-        graphics::clear(ctx, Color::BLACK);
+        let mut canvas = graphics::Canvas::from_frame(ctx, Color::BLACK);
 
         let size = 16.0;
-        let (w, h) = graphics::size(ctx);
+        let (w, h) = ctx.gfx.drawable_size();
 
         // Things are drawn from their upper-left corner
         let circle = Mesh::new_circle(
@@ -97,11 +96,10 @@ impl EventHandler for MainState {
             0.1,
             Color::RED,
         )?;
-        graphics::draw(ctx, &circle, DrawParam::default())?;
+        canvas.draw(&circle, DrawParam::default());
 
-        graphics::present(ctx)?;
+        canvas.finish(ctx)?;
         timer::yield_now();
-
         Ok(())
     }
 }
