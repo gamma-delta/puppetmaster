@@ -1,7 +1,6 @@
 use std::hash::Hash;
 
 use ahash::{AHashMap, AHashSet};
-use itertools::Itertools;
 
 /// Input handler for an event-based game engine.
 ///
@@ -131,7 +130,7 @@ impl<I: Hash + Eq + Clone, C: Hash + Eq + Clone> EventInputHandler<I, C> {
     /// Update the input handler. You MUST CALL THIS FIRST THING in your game loop.
     /// Otherwise things won't get updated correctly.
     pub fn update(&mut self) {
-        let all_controls_once = self.control_config.values().dedup().collect_vec();
+        let all_controls_once: AHashSet<_> = self.control_config.values().collect();
         for control in all_controls_once {
             let pressed = self.pressed_controls.contains(control);
             if pressed {
